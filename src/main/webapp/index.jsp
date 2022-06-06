@@ -4,13 +4,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Capstone Demo Login</title>
+        <link rel="stylesheet" type="text/css" href="global.css"/>
     </head>
     <body>
         <h1>Demo Login</h1>
-        <a href="Login?userid=0">Login as an Admin</a><br/>
-        <a href="Login?userid=1">Login as an Teacher</a><br/>
-        <a href="Login?userid=2">Login as an Student</a><br/>
+        <a href="Login?userid=0">Login as an Demo Admin</a><br/>
+        <a href="Login?userid=1">Login as an Demo Teacher</a><br/>
+        <a href="Login?userid=4">Login as an Demo Student</a><br/>
         
         <c:if test="${sessionScope.error != null}">
         <p style="color:red"><%=session.getAttribute("error")%></p>

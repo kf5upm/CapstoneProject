@@ -1,21 +1,20 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.CascadeType;
+import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "courses")
+@NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c")
 public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -32,10 +31,13 @@ public class Course implements Serializable {
     @ManyToOne
     private User teacher;
     
-    @ManyToMany
-    @JoinTable(name = "course_records", joinColumns = @JoinColumn(name = "CourseId"), inverseJoinColumns = @JoinColumn(name = "StudentId"))
-    private List<User> students;
+    //@ManyToMany
+    //@JoinTable(name = "course_records", joinColumns = @JoinColumn(name = "CourseId"), inverseJoinColumns = @JoinColumn(name = "StudentId"))
+    //private List<User> students;
 
+    @ManyToMany(mappedBy = "coursesTaken")
+    private Set<User> students;
+    
     public Long getId() {
         return id;
     }
@@ -67,7 +69,11 @@ public class Course implements Serializable {
     public void setTeacher(User teacher) {
         this.teacher = teacher;
     }
-    
+
+    public Set<User> getStudents() {
+        return students;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -87,4 +93,11 @@ public class Course implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" + "id=" + id + ", title=" + title + ", credits=" + credits + ", teacher=" + teacher + ", students=" + students + '}';
+    }
+    
+    
 }

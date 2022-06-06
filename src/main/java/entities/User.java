@@ -1,6 +1,7 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,6 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -26,6 +30,13 @@ public class User implements Serializable {
     
     @ManyToOne
     private Role role;
+    
+    @OneToMany(mappedBy = "teacher")
+    private Collection<Course> coursesTaught;
+    
+    @ManyToMany
+    @JoinTable(name = "course_records", joinColumns = @JoinColumn(name = "UserId"), inverseJoinColumns = @JoinColumn(name = "CourseId"))
+    private Collection<Course> coursesTaken;
     
     public Long getId() {
         return id;
@@ -50,7 +61,15 @@ public class User implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }
-    
+
+    public Collection<Course> getCoursesTaught() {
+        return coursesTaught;
+    }
+
+    public Collection<Course> getCoursesTaken() {
+        return coursesTaken;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;

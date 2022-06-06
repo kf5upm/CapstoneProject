@@ -25,7 +25,7 @@ public class EMF implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         logger.debug("Creating entity manager factory.");
         
-        emf = Persistence.createEntityManagerFactory("JPAWebAppPU");
+        emf = Persistence.createEntityManagerFactory("CapstonePU");
     }
 
     @Override

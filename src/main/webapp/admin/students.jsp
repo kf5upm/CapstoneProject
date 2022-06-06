@@ -1,7 +1,7 @@
 <%-- 
-    Document   : student.jsp
-    Created on : Jun 5, 2022, 6:44:57 PM
-    Author     : kf5up
+    Document   : students
+    Created on : Jun 6, 2022, 2:54:09 PM
+    Author     : M.Myers
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,9 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Student Home Page</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome Student</h1>
+        <h1>Hello World!</h1>
     </body>
 </html>
