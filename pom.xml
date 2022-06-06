@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.learning</groupId>
-    <artifactId>JPAWebApp</artifactId>
+    <artifactId>McDowell_Capstone</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
 
-    <name>JPAWebApp</name>
+    <name>McDowell_Capstone</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
