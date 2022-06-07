@@ -9,7 +9,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Home Page</title>
-        <link rel="stylesheet" type="text/css" href="global.css"/>
+        <link rel="stylesheet" type="text/css" href="../global.css"/>
     </head>
     <body>
         <h1>Welcome <%=user.getName()%></h1>

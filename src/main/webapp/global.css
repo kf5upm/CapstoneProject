@@ -4,6 +4,10 @@ tfoot {
     color: #fff;
 }
 
+tfoot th a {
+    color: #fff;
+}
+
 tbody {
     background-color: #e4f0f5;
 }

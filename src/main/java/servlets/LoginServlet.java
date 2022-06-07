@@ -29,6 +29,9 @@ public class LoginServlet extends HttpServlet {
                 errorMessage = "Unknown user or bad password.";
             } else {
                 session.setAttribute("user", user);
+
+                String viewsPath = "/views/" + user.getRole().getTitle().toLowerCase() + "/";
+                session.setAttribute("viewsPath", viewsPath);
             }
         } catch (Exception ex) {
             errorMessage = ex.getMessage();

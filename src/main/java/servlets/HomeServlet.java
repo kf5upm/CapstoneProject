@@ -1,5 +1,7 @@
 package servlets;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import entities.Role;
 import entities.User;
 import java.io.IOException;
@@ -14,17 +16,18 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "HomeServlet", urlPatterns = {"/Home"})
 public class HomeServlet extends HttpServlet {
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        String view = (String)session.getAttribute("viewsPath");// + "index.jsp";
         
-        String homeView = user.getRole().getTitle().toLowerCase() + "/index.jsp";
-        RequestDispatcher rd = request.getRequestDispatcher(homeView);
+        logger.debug(view);
         
+        RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
     }
 //
