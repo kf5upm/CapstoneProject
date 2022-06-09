@@ -1,40 +1,7 @@
-thead,
-tfoot {
-    background-color: #4682B4;
-    color: #fff;
-}
-
-tfoot th a {
-    color: #fff;
-}
-
-tbody {
-    background-color: #e4f0f5;
-}
-
 caption {
-    padding: 10px;
     caption-side: top;
-    color: #fff;
-    background-color: #3f87a6;
-    font-weight: bold;
-    
 }
 
-table {
-    border-collapse: collapse;
-    border: 2px solid rgb(200, 200, 200);
-    letter-spacing: 1px;
-    font-family: sans-serif;
-    font-size: .8rem;
-}
-
-td,
-th {
-    border: 1px solid rgb(190, 190, 190);
-    padding: 5px 10px;
-}
-
-td {
-    text-align: center;
+nav .logout a {
+    color: white !important;
 }

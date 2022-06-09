@@ -13,6 +13,7 @@
       <property name="javax.persistence.jdbc.password" value="password"/>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
       <property name="javax.persistence.sql-load-script-source" value="META-INF/seeddata.sql"/>      
+      <property name="eclipselink.ddl-generation" value="create-or-extend-tables" />
     </properties>
   </persistence-unit>
 </persistence>

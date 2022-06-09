@@ -13,20 +13,32 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
+@NamedQueries({
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role.title = :role")
+})
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    
+    @Column(name = "FirstName", length = 50, nullable = false, unique = false)
+    private String firstName;
 
-    @Column(name = "Name", length = 50, nullable = false, unique = false)
-    private String name;
+    @Column(name = "LastName", length = 50, nullable = false, unique = false)
+    private String lastName;
+    
+    @Column(name = "Gender", length = 10, nullable = false, unique = false)
+    private String gender;
     
     @ManyToOne
     private Role role;
@@ -46,14 +58,30 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+    
     public Role getRole() {
         return role;
     }
@@ -92,8 +120,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", role=" + role.getTitle() + '}';
+        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", role=" + role + ", coursesTaught=" + coursesTaught + ", coursesTaken=" + coursesTaken + '}';
     }
-    
-    
 }
