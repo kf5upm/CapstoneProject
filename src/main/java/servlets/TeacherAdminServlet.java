@@ -89,7 +89,6 @@ public class TeacherAdminServlet extends HttpServlet {
             Create(request, response);
         else
             Update(request, response);
-        
 
         request.getSession().removeAttribute("teacher");
         response.sendRedirect(request.getContextPath() + "/Manage/Teachers");
@@ -107,26 +106,21 @@ public class TeacherAdminServlet extends HttpServlet {
         teacher.setRole(role);
         
         new UserDao().save(teacher);
-        
-        PrintWriter w = response.getWriter();
-        w.println("Saved");
     }
     
     private void Update(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        TeacherDao tdao = new TeacherDao();
 
-        User teacher = tdao.find(Long.parseLong(request.getParameter("id")));
+        Long teacherId = Long.parseLong(request.getParameter("id"));
+
+        TeacherDao tdao = new TeacherDao();
+        User teacher = tdao.find(teacherId);
 
         teacher.setFirstName(request.getParameter("firstname"));
         teacher.setLastName(request.getParameter("lastname"));
         teacher.setGender(request.getParameter("gender"));
         
         tdao.update(teacher);
-        
-        PrintWriter w = response.getWriter();
-        w.println("Updated");
     }
     
     

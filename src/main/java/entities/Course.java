@@ -13,7 +13,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "courses")
+@Table(name = "courses", schema="capstone")
 @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c")
 public class Course implements Serializable {
 
@@ -22,8 +22,8 @@ public class Course implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "Title", length = 50, nullable = false, unique = true)
-    private String title;
+    @Column(name = "Name", length = 50, nullable = false, unique = true)
+    private String name;
 
     @Column(name = "Credits")
     private Long credits;
@@ -46,12 +46,12 @@ public class Course implements Serializable {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getCredits() {
@@ -93,11 +93,4 @@ public class Course implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Course{" + "id=" + id + ", title=" + title + ", credits=" + credits + ", teacher=" + teacher + ", students=" + students + '}';
-    }
-    
-    
 }

@@ -14,11 +14,11 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/global.css"/>
-    <title>Teacher Management</title>
+    <title>Student Management</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Manage Teachers</a>
+        <a class="navbar-brand" href="#">Manage Students</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,13 +27,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value = "/Home"/>">Home</a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="<c:url value = "/Manage/Teachers"/>">Teachers</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value = "/Manage/Courses"/>">Courses</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="<c:url value = "/Manage/Students"/>">Students</a>
                 </li>
 <!--                    <li class="nav-item">
@@ -49,31 +49,31 @@
         <div class="row">
             <div class="col-2">
               <form method="post">
-                <c:if test="${teacher != null}">
-                <div style="padding-top: 0.75rem; color: #6c757d"><h5>Edit Teacher</h5></div>
+                <c:if test="${student != null}">
+                <div style="padding-top: 0.75rem; color: #6c757d"><h5>Edit Student</h5></div>
                 <input type="hidden" name="action" value="update"/>
                 </c:if>
-                <c:if test="${teacher == null}">
-                <div style="padding-top: 0.75rem; color: #6c757d"><h5>Add Teacher</h5></div>
+                <c:if test="${student == null}">
+                <div style="padding-top: 0.75rem; color: #6c757d"><h5>Add Student</h5></div>
                 <input type="hidden" name="action" value="create"/>
                 </c:if>
                 <div class="form-group d-flex flex-column">
-                    <label for="userid" class="control-label">Teacher ID</label>
-                    <input class="form-conrol" type="text" name="id" value="${teacher.id}" <c:if test="${teacher != null}">READONLY</c:if>/>
+                    <label for="userid" class="control-label">Student ID</label>
+                    <input class="form-conrol" type="text" name="id" value="${student.id}" <c:if test="${student != null}">READONLY</c:if>/>
                 </div>
                 <div class="form-group d-flex flex-column">
                     <label for="firstname" class="control-label">First Name</label>
-                    <input class="form-conrol" type="text" name="firstname" value="${teacher.firstName}"/>
+                    <input class="form-conrol" type="text" name="firstname" value="${student.firstName}"/>
                 </div>
 
                 <div class="form-group d-flex flex-column">
                     <label for="lastname" class="control-label">Last Name</label>
-                    <input class="form-conrol" type="text" name="lastname" value="${teacher.lastName}"/>
+                    <input class="form-conrol" type="text" name="lastname" value="${student.lastName}"/>
                 </div>
 
                 <div class="form-group d-flex flex-column">
                     <label for="gender" class="control-label">Gender</label>
-                    <input class="form-conrol" type="text" name="gender" value="${teacher.gender}"/>
+                    <input class="form-conrol" type="text" name="gender" value="${student.gender}"/>
                 </div>
                 <div class="text-right">
                     <div class="buttons btn-group">
@@ -85,7 +85,7 @@
             </div>
             <div class="col-10">
                 <table class="table">
-                  <caption><h5>Teachers List</h5></caption>
+                  <caption><h5>Students List</h5></caption>
                   <thead class="thead-light">
                       <tr>
                           <th>ID</th>
@@ -95,13 +95,13 @@
                           <th class="text-right">Action</th></tr>
                   </thead>
                   <tbody>
-                      <c:forEach items="${sessionScope.payload}" var="teacher">
+                      <c:forEach items="${sessionScope.payload}" var="student">
                           <tr>
-                              <td>${teacher.getId()}</td>
-                              <td>${teacher.getFirstName()}</td>
-                              <td>${teacher.getLastName()}</td>
-                              <td>${teacher.getGender()}</td>
-                              <td class="text-right"><a href="<c:url value="/Manage/Teachers/Edit/${teacher.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Teachers/Delete/${teacher.getId()}"/>">Delete</a></td>
+                              <td>${student.getId()}</td>
+                              <td>${student.getFirstName()}</td>
+                              <td>${student.getLastName()}</td>
+                              <td>${student.getGender()}</td>
+                              <td class="text-right"><a href="<c:url value="/Manage/Teachers/Edit/${student.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Teachers/Delete/${student.getId()}"/>">Delete</a></td>
                           </tr>
                       </c:forEach>
                   </tbody>
