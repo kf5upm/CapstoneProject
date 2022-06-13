@@ -1,8 +1,10 @@
+<%@page import="java.util.Collection"%>
 <%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%
     User user = (User) session.getAttribute("user");
+    Collection<User> teachers = (Collection<User>) session.getAttribute("teachers");
 %>
 <!doctype html>
 <html lang="en">
@@ -46,36 +48,37 @@
         <div class="row">
             <div class="col-2">
               <form method="post">
-                <c:if test="${course != null}">
+                <c:if test="${selected != null}">
                 <div style="padding-top: 0.75rem; color: #6c757d"><h5>Edit Course</h5></div>
                 <input type="hidden" name="action" value="update"/>
                 </c:if>
-                <c:if test="${course == null}">
+                <c:if test="${selected == null}">
                 <div style="padding-top: 0.75rem; color: #6c757d"><h5>Add Course</h5></div>
                 <input type="hidden" name="action" value="create"/>
                 </c:if>
                 <div class="form-group d-flex flex-column">
-                    <label for="userid" class="control-label">Course ID</label>
-                    <input class="form-conrol" type="text" name="id" value="${course.id}" <c:if test="${course != null}">READONLY</c:if>/>
-                </div>
-                <div class="form-group d-flex flex-column">
                     <label for="firstname" class="control-label">Course Name</label>
-                    <input class="form-conrol" type="text" name="firstname" value="${course.firstName}"/>
+                    <input class="form-control" type="text" name="name" value="${selected.name}"/>
                 </div>
 
                 <div class="form-group d-flex flex-column">
-                    <label for="lastname" class="control-label">Last Name</label>
-                    <input class="form-conrol" type="text" name="lastname" value="${course.lastName}"/>
+                    <label for="lastname" class="control-label">Credits</label>
+                    <input class="form-control" type="text" name="credits" value="${selected.credits}"/>
                 </div>
 
                 <div class="form-group d-flex flex-column">
-                    <label for="gender" class="control-label">Gender</label>
-                    <input class="form-conrol" type="text" name="gender" value="${course.gender}"/>
+                    <label for="gender" class="control-label">Teacher</label>
+                    <select class="form-control" name="teacher">
+                        <option value="" selected disabled>-- Select Instructor --</option>
+                        <c:forEach items="${teachers}" var="teacher">
+                        <option value="${teacher.id}">${teacher.lastName}</option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="text-right">
                     <div class="buttons btn-group">
                         <input class="form-control" type="submit" value="Save"/>
-                        <a class="form-control" href="/Capstone/Manage/Teachers">Reset</a>
+                        <a class="form-control" href="/Capstone/Manage/Courses">Reset</a>
                     </div>
                 </div
               </form>
@@ -86,19 +89,19 @@
                   <thead class="thead-light">
                       <tr>
                           <th>ID</th>
-                          <th>First Name</th>
-                          <th>Last Name</th>
-                          <th>Gender</th>
+                          <th>Course Name</th>
+                          <th>Credits</th>
+                          <th>Instructor</th>
                           <th class="text-right">Action</th></tr>
                   </thead>
                   <tbody>
                       <c:forEach items="${sessionScope.payload}" var="course">
                           <tr>
                               <td>${course.getId()}</td>
-                              <td>${course.getFirstName()}</td>
-                              <td>${course.getLastName()}</td>
-                              <td>${course.getGender()}</td>
-                              <td class="text-right"><a href="<c:url value="/Manage/Teachers/Edit/${course.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Teachers/Delete/${course.getId()}"/>">Delete</a></td>
+                              <td>${course.getName()}</td>
+                              <td>${course.getCredits()}</td>
+                              <td>${course.getTeacher().lastName}</td>
+                              <td class="text-right"><a href="<c:url value="/Manage/Courses/Edit/${course.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Courses/Delete/${course.getId()}"/>">Delete</a></td>
                           </tr>
                       </c:forEach>
                   </tbody>
@@ -106,7 +109,6 @@
             </div>
         </div>
     </div>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

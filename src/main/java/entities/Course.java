@@ -19,7 +19,7 @@ public class Course implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "Name", length = 50, nullable = false, unique = true)
@@ -93,4 +93,11 @@ public class Course implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" + "id=" + id + ", name=" + name + ", credits=" + credits + ", teacher=" + teacher + ", students=" + students + '}';
+    }
+    
+    
 }

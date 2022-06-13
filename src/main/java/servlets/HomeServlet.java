@@ -24,9 +24,6 @@ public class HomeServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
         String view = (String)session.getAttribute("viewsPath");// + "index.jsp";
-        
-        logger.debug(view);
-        
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
     }

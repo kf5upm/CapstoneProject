@@ -36,9 +36,6 @@
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value = "/Manage/Students"/>">Students</a>
                 </li>
-<!--                    <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>-->
             </ul>
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout <%=user.getFirstName()%></a></li>
@@ -49,31 +46,35 @@
         <div class="row">
             <div class="col-2">
               <form method="post">
-                <c:if test="${teacher != null}">
+                <c:if test="${selected != null}">
                 <div style="padding-top: 0.75rem; color: #6c757d"><h5>Edit Teacher</h5></div>
                 <input type="hidden" name="action" value="update"/>
                 </c:if>
-                <c:if test="${teacher == null}">
+                <c:if test="${selected == null}">
                 <div style="padding-top: 0.75rem; color: #6c757d"><h5>Add Teacher</h5></div>
                 <input type="hidden" name="action" value="create"/>
                 </c:if>
                 <div class="form-group d-flex flex-column">
                     <label for="userid" class="control-label">Teacher ID</label>
-                    <input class="form-conrol" type="text" name="id" value="${teacher.id}" <c:if test="${teacher != null}">READONLY</c:if>/>
+                    <input class="form-control" type="text" name="id" value="${selected.id}" <c:if test="${selected != null}">READONLY</c:if>/>
                 </div>
                 <div class="form-group d-flex flex-column">
                     <label for="firstname" class="control-label">First Name</label>
-                    <input class="form-conrol" type="text" name="firstname" value="${teacher.firstName}"/>
+                    <input class="form-control" type="text" name="firstname" value="${selected.firstName}"/>
                 </div>
 
                 <div class="form-group d-flex flex-column">
                     <label for="lastname" class="control-label">Last Name</label>
-                    <input class="form-conrol" type="text" name="lastname" value="${teacher.lastName}"/>
+                    <input class="form-control" type="text" name="lastname" value="${selected.lastName}"/>
                 </div>
 
                 <div class="form-group d-flex flex-column">
                     <label for="gender" class="control-label">Gender</label>
-                    <input class="form-conrol" type="text" name="gender" value="${teacher.gender}"/>
+                    <select class="form-control" name="gender">
+                        <option value="" selected disabled>-- Select Gender --</option>
+                        <option value="Male"<c:if test="${selected.gender == 'Male'}"> SELECTED</c:if>>Male</option>
+                        <option value="Female"<c:if test="${selected.gender == 'Female'}"> SELECTED</c:if>>Female</option>
+                    </select>
                 </div>
                 <div class="text-right">
                     <div class="buttons btn-group">
@@ -101,7 +102,7 @@
                               <td>${teacher.getFirstName()}</td>
                               <td>${teacher.getLastName()}</td>
                               <td>${teacher.getGender()}</td>
-                              <td class="text-right"><a href="<c:url value="/Manage/Teachers/Edit/${teacher.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Teachers/Delete/${teacher.getId()}"/>">Delete</a></td>
+                              <td class="text-right"><a href="<c:url value="/Manage/Teachers/Edit/${teacher.getId()}"/>">Edit</a> | <a class="confirmation" href="<c:url value="/Manage/Teachers/Delete/${teacher.getId()}"/>">Delete</a></td>
                           </tr>
                       </c:forEach>
                   </tbody>
@@ -115,5 +116,14 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        var elems = document.getElementsByClassName('confirmation');
+        var confirmIt = function (e) {
+            if (!confirm('Are you sure you wish to delete this user?')) e.preventDefault();
+        };
+        for (var i = 0, l = elems.length; i < l; i++) {
+            elems[i].addEventListener('click', confirmIt, false);
+        }
+    </script>        
   </body>
 </html>

@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import database.EMF;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.EntityManager;
 
 public abstract class AbstractDAO<T> implements Serializable {
@@ -19,6 +20,8 @@ public abstract class AbstractDAO<T> implements Serializable {
         return em.find(type, id);
     }
     
+    public abstract Collection<T> findAll();
+    
     public void save(T entity) {
         em.getTransaction().begin();
         em.persist(entity);
@@ -28,6 +31,12 @@ public abstract class AbstractDAO<T> implements Serializable {
     public void update(T entity) {
         em.getTransaction().begin();
         em.merge(entity);
+        em.getTransaction().commit();
+    }
+    
+    public void delete(T entity) {
+        em.getTransaction().begin();
+        em.remove(entity);
         em.getTransaction().commit();
     }
 }

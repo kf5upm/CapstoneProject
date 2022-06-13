@@ -1,17 +1,24 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
+import static dao.AbstractDAO.em;
 import entities.Role;
+import java.util.Collection;
+import javax.persistence.TypedQuery;
 
-/**
- *
- * @author M.Myers
- */
 public class RoleDao extends AbstractDAO<Role> {
     public RoleDao() {
         super(Role.class);
+    }
+    
+    @Override
+    public Collection<Role> findAll() {
+        TypedQuery<Role> query = em.createNamedQuery("Role.findByRole", Role.class);
+        return (Collection<Role>) query.getResultList();
+    }
+
+    public Role findByTitle(String title) {
+        TypedQuery<Role> query = em.createNamedQuery("Role.findByRole", Role.class);
+        query.setParameter("title", title);
+        return query.getSingleResult();
     }
 }

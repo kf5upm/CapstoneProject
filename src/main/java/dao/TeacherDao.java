@@ -10,6 +10,7 @@ public class TeacherDao extends AbstractDAO<User> {
         super(User.class);
     }
 
+    @Override
     public Collection<User> findAll() {
         TypedQuery<User> query = em.createNamedQuery("User.findByRole", User.class);
         query.setParameter("role", "Teacher");
