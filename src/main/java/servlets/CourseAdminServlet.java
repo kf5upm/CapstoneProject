@@ -42,6 +42,7 @@ public class CourseAdminServlet extends AbstractAdminServlet<Course> {
           
           course.setName(request.getParameter("name"));
           course.setCredits(Long.parseLong(request.getParameter("credits")));
+          course.setTeacher(new TeacherDao().find(Long.parseLong(request.getParameter("teacher"))));
 
           new CourseDao().save(course);
     }
@@ -74,6 +75,7 @@ public class CourseAdminServlet extends AbstractAdminServlet<Course> {
 
         course.setName(request.getParameter("name"));
         course.setCredits(Long.parseLong(request.getParameter("credits")));
+        course.setTeacher(new TeacherDao().find(Long.parseLong(request.getParameter("teacher"))));
         
         cdao.update(course);
     }

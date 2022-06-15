@@ -43,7 +43,7 @@ public class User implements Serializable {
     @ManyToOne
     private Role role;
     
-    @OneToMany(mappedBy = "teacher")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
     private Collection<Course> coursesTaught;
     
     @ManyToMany

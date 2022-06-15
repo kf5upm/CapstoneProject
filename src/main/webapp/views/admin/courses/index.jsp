@@ -51,6 +51,7 @@
                 <c:if test="${selected != null}">
                 <div style="padding-top: 0.75rem; color: #6c757d"><h5>Edit Course</h5></div>
                 <input type="hidden" name="action" value="update"/>
+                <input type="hidden" name="id" value="${selected.id}"/>
                 </c:if>
                 <c:if test="${selected == null}">
                 <div style="padding-top: 0.75rem; color: #6c757d"><h5>Add Course</h5></div>
@@ -71,7 +72,7 @@
                     <select class="form-control" name="teacher">
                         <option value="" selected disabled>-- Select Instructor --</option>
                         <c:forEach items="${teachers}" var="teacher">
-                        <option value="${teacher.id}">${teacher.lastName}</option>
+                            <option value="${teacher.id}"<c:if test="${teacher.id == selected.teacher.id}"> SELECTED</c:if>>${teacher.lastName}</option>
                         </c:forEach>
                     </select>
                 </div>
