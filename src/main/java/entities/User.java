@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,9 +47,12 @@ public class User implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
     private Collection<Course> coursesTaught;
     
-    @ManyToMany
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "course_records", joinColumns = @JoinColumn(name = "UserId"), inverseJoinColumns = @JoinColumn(name = "CourseId"))
     private Collection<Course> coursesTaken;
+    
+    @Column(name = "GPA")
+    private float gpa;
     
     public Long getId() {
         return id;
@@ -90,6 +94,14 @@ public class User implements Serializable {
         this.role = role;
     }
 
+    public float getGpa() {
+        return gpa;
+    }
+
+    public void setGpa(float gpa) {
+        this.gpa = gpa;
+    }
+    
     public Collection<Course> getCoursesTaught() {
         return coursesTaught;
     }

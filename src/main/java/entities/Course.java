@@ -1,9 +1,11 @@
 package entities;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,7 +38,7 @@ public class Course implements Serializable {
     //private List<User> students;
 
     @ManyToMany(mappedBy = "coursesTaken")
-    private Set<User> students;
+    private Collection<User> students;
     
     public Long getId() {
         return id;
@@ -70,7 +72,7 @@ public class Course implements Serializable {
         this.teacher = teacher;
     }
 
-    public Set<User> getStudents() {
+    public Collection<User> getStudents() {
         return students;
     }
 
@@ -98,6 +100,4 @@ public class Course implements Serializable {
     public String toString() {
         return "Course{" + "id=" + id + ", name=" + name + ", credits=" + credits + ", teacher=" + teacher + ", students=" + students + '}';
     }
-    
-    
 }

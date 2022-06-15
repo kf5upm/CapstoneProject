@@ -17,7 +17,7 @@ public class RoleDao extends AbstractDAO<Role> {
     }
 
     public Role findByTitle(String title) {
-        TypedQuery<Role> query = em.createNamedQuery("Role.findByRole", Role.class);
+        TypedQuery<Role> query = em.createNamedQuery("Role.findByTitle", Role.class);
         query.setParameter("title", title);
         return query.getSingleResult();
     }

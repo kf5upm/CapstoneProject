@@ -26,12 +26,11 @@
                                 <div class="input-group mb-3">
                                     <span class="input-group-text bg-primary">
                                         <i class="bi bi-person-fill text-white"></i></span>
-                                    <input type="text" maxlength="6" pattern="^[0-9]{6}$" class="form-control" placeholder="Enter your Student/Teacher ID (eg. 123456)" name="UserID" title="123456">
+                                    <input type="text" maxlength="6" pattern="^[0-9]{6}$" class="form-control" placeholder="Enter your Student/Teacher ID (eg. 123456)" name="userid" title="123456">
                                 </div>
-                                <% String error = (String) session.getAttribute("error"); %>
-                                <% if (error != null) { %>
-                                <div class="alert alert-danger" role="alert"><%=error%></div>
-                                <% } %>
+                                <c:if test="${error != null}">
+                                <div class="alert alert-danger" role="alert">${error}</div>
+                                </c:if>
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
@@ -45,10 +44,8 @@
                         </form>
                         <br/>
                         <div>
-                            <h3>Demo Login</h3>
-                            <a href="Login?userid=0">Login as an Demo Admin</a><br/>
-                            <a href="Login?userid=1">Login as an Demo Teacher</a><br/>
-                            <a href="Login?userid=4">Login as an Demo Student</a><br/>
+                            <h5>Demo</h5>
+                            <p>Use 999999 to login as the administrator or click <a href="Login?userid=999999">here</a>.</p>
                         </div>
                     </div>
                 </div>

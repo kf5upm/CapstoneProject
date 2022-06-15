@@ -3,7 +3,6 @@ package servlets;
 import dao.RoleDao;
 import dao.StudentDao;
 import dao.UserDao;
-import entities.Role;
 import entities.User;
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -1,6 +1,8 @@
 package servlets;
 
 import dao.AbstractDAO;
+import dao.CourseDao;
+import entities.Course;
 import java.io.IOException;
 import java.util.Collection;
 import javax.servlet.RequestDispatcher;
@@ -56,6 +58,9 @@ public abstract class AbstractAdminServlet<T> extends HttpServlet {
     protected void List(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        
+        Collection<Course> offered = new CourseDao().findAll();
+        session.setAttribute("offered", offered);
         
         AbstractDAO dao = getDao();
         Collection<T> collection = dao.findAll();

@@ -1,9 +1,6 @@
 <%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%
-    User user = (User) session.getAttribute("user");
-%>
 <!doctype html>
 <html lang="en">
     <head>
@@ -18,7 +15,7 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="#">Admin Home</a>
+            <a class="navbar-brand" href="">Admin Home</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,13 +38,14 @@
                     </li>-->
                 </ul>
                 <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout <%=user.getFirstName()%></a></li>
+                    <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout ${user.getFirstName()}</a></li>
                 </ul>
             </div>
         </nav>
+        <p class="text-right small mr-2">View version 0.02</p>
         <div class="container col-12 text-center">
             <br/><br/><br/>
-            <h1>Welcome <%=user.getFirstName()%> <%=user.getLastName()%></h1>
+            <h1>Welcome ${user.getFirstName()} ${user.getLastName()}</h1>
             <img src="images/home-logo.png"/>
         </div>
         

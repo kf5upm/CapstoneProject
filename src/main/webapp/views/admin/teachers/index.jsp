@@ -1,9 +1,6 @@
 <%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%
-    User user = (User) session.getAttribute("user");
-%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -38,10 +35,11 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout <%=user.getFirstName()%></a></li>
+                <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout ${user.getFirstName()}</a></li>
             </ul>
         </div>
     </nav>
+    <p class="text-right small mr-2">View version 0.09</p>
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
@@ -93,7 +91,7 @@
                           <th>First Name</th>
                           <th>Last Name</th>
                           <th>Gender</th>
-                          <th class="text-right">Action</th></tr>
+                          <th class="action text-center">Action</th></tr>
                   </thead>
                   <tbody>
                       <c:forEach items="${sessionScope.payload}" var="teacher">
@@ -102,7 +100,7 @@
                               <td>${teacher.getFirstName()}</td>
                               <td>${teacher.getLastName()}</td>
                               <td>${teacher.getGender()}</td>
-                              <td class="text-right"><a href="<c:url value="/Manage/Teachers/Edit/${teacher.getId()}"/>">Edit</a> | <a class="confirmation" href="<c:url value="/Manage/Teachers/Delete/${teacher.getId()}"/>">Delete</a></td>
+                              <td class="action text-center"><a href="<c:url value="/Manage/Teachers/Edit/${teacher.getId()}"/>">Edit</a> | <a class="confirmation" href="<c:url value="/Manage/Teachers/Delete/${teacher.getId()}"/>">Delete</a></td>
                           </tr>
                       </c:forEach>
                   </tbody>

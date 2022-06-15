@@ -2,10 +2,6 @@
 <%@page import="entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%
-    User user = (User) session.getAttribute("user");
-    Collection<User> teachers = (Collection<User>) session.getAttribute("teachers");
-%>
 <!doctype html>
 <html lang="en">
   <head>
@@ -40,10 +36,11 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto">
-                <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout <%=user.getFirstName()%></a></li>
+                <li class="nav-link logout"><a href="<c:url value = "/Logout"/>">Logout ${user.getFirstName()}</a></li>
             </ul>
         </div>
     </nav>
+    <p class="text-right small mr-2">View version 0.09</p>
     <div class="container-fluid">
         <div class="row">
             <div class="col-2">
@@ -61,20 +58,18 @@
                     <label for="firstname" class="control-label">Course Name</label>
                     <input class="form-control" type="text" name="name" value="${selected.name}"/>
                 </div>
-
-                <div class="form-group d-flex flex-column">
-                    <label for="lastname" class="control-label">Credits</label>
-                    <input class="form-control" type="text" name="credits" value="${selected.credits}"/>
-                </div>
-
                 <div class="form-group d-flex flex-column">
                     <label for="gender" class="control-label">Teacher</label>
                     <select class="form-control" name="teacher">
                         <option value="" selected disabled>-- Select Instructor --</option>
                         <c:forEach items="${teachers}" var="teacher">
-                            <option value="${teacher.id}"<c:if test="${teacher.id == selected.teacher.id}"> SELECTED</c:if>>${teacher.lastName}</option>
+                            <option value="${teacher.id}"<c:if test="${teacher.id == selected.teacher.id}"> SELECTED</c:if>>${teacher.firstName} ${teacher.lastName}</option>
                         </c:forEach>
                     </select>
+                </div>
+                <div class="form-group d-flex flex-column">
+                    <label for="lastname" class="control-label">Credits</label>
+                    <input class="form-control" type="text" name="credits" value="${selected.credits}"/>
                 </div>
                 <div class="text-right">
                     <div class="buttons btn-group">
@@ -89,20 +84,18 @@
                   <caption><h5>Course List</h5></caption>
                   <thead class="thead-light">
                       <tr>
-                          <th>ID</th>
                           <th>Course Name</th>
-                          <th>Credits</th>
                           <th>Instructor</th>
-                          <th class="text-right">Action</th></tr>
+                          <th>Credits</th>
+                          <th class="action text-center">Action</th></tr>
                   </thead>
                   <tbody>
                       <c:forEach items="${sessionScope.payload}" var="course">
                           <tr>
-                              <td>${course.getId()}</td>
                               <td>${course.getName()}</td>
+                              <td>${course.getTeacher().firstName} ${course.getTeacher().lastName}</td>
                               <td>${course.getCredits()}</td>
-                              <td>${course.getTeacher().lastName}</td>
-                              <td class="text-right"><a href="<c:url value="/Manage/Courses/Edit/${course.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Courses/Delete/${course.getId()}"/>">Delete</a></td>
+                              <td class="action text-center"><a href="<c:url value="/Manage/Courses/Edit/${course.getId()}"/>">Edit</a> | <a href="<c:url value="/Manage/Courses/Delete/${course.getId()}"/>">Delete</a></td>
                           </tr>
                       </c:forEach>
                   </tbody>

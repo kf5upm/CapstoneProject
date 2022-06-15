@@ -5,3 +5,8 @@ caption {
 nav .logout a {
     color: white !important;
 }
+
+.action {
+    white-space: nowrap;
+    width: 1%;
+}
