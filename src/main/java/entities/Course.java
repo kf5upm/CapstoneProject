@@ -3,6 +3,7 @@ package entities;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +31,7 @@ public class Course implements Serializable {
     @Column(name = "Credits")
     private Long credits;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User teacher;
     
     //@ManyToMany

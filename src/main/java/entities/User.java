@@ -109,6 +109,14 @@ public class User implements Serializable {
     public Collection<Course> getCoursesTaken() {
         return coursesTaken;
     }
+    
+    public void setCoursesTaken(Collection<Course> selected) {
+        if (selected == null) {
+            this.coursesTaken = null;
+        } else {
+            this.coursesTaken = selected;            
+        }
+    }
 
     @Override
     public int hashCode() {

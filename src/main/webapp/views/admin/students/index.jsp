@@ -81,8 +81,8 @@
                     <input class="form-control" type="text" name="gpa" value="${selected.gpa}"/>
                 </div>
                 <div class="form-group d-flex flex-column">
-                    <label for="offered" class="control-label">Offered Courses</label>
-                    <select multiple>
+                    <label for="offerings" class="control-label">Offered Courses</label>
+                    <select name="offerings" id="offerings" multiple>
                         <c:forEach items="${offered}" var="offering">
                             <option value="${offering.getId()}"  <c:if test="${fn:contains(selected.getCoursesTaken(), offering)}">SELECTED</c:if>>
                                 ${offering.getName()}
@@ -146,6 +146,11 @@
         for (var i = 0, l = elems.length; i < l; i++) {
             elems[i].addEventListener('click', confirmIt, false);
         }
+        
+        document.querySelectorAll('#offerings option').forEach(el => el.addEventListener('mousedown',(e) => {
+                e.preventDefault();
+                el.selected = !el.selected;
+        }));        
         
         function addCourse() {
             var idxs = offered.options.length - 1;
