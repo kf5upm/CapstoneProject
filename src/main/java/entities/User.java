@@ -1,8 +1,9 @@
 package entities;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,9 +11,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,6 +24,7 @@ import javax.persistence.Table;
     @NamedQuery(name = "User.findByRole", query = "SELECT u FROM User u WHERE u.role.title = :role")
 })
 public class User implements Serializable {
+    private static final Logger logger = LogManager.getLogger();
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,10 +45,13 @@ public class User implements Serializable {
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
     private Collection<Course> coursesTaught;
-    
-    @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name = "course_records", joinColumns = @JoinColumn(name = "UserId"), inverseJoinColumns = @JoinColumn(name = "CourseId"))
-    private Collection<Course> coursesTaken;
+//    
+//    @ManyToMany(fetch=FetchType.EAGER)
+//    @JoinTable(name = "student_course_records", joinColumns = @JoinColumn(name = "student_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+//    private Collection<Course> coursesTaken;
+//    
+    @OneToMany(mappedBy = "student", fetch=FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<CourseRecord> courseRecords;
     
     @Column(name = "GPA")
     private float gpa;
@@ -105,19 +107,27 @@ public class User implements Serializable {
     public Collection<Course> getCoursesTaught() {
         return coursesTaught;
     }
+//
+//    public Collection<Course> getCoursesTaken() {
+//        return coursesTaken;
+//    }
+//    
+//    public void setCoursesTaken(Collection<Course> selected) {
+//        if (selected == null) {
+//            this.coursesTaken = null;
+//        } else {
+//            this.coursesTaken = selected;            
+//        }
+//    }
+//
+    public Collection<CourseRecord> getCourseRecords() {
+        return courseRecords;
+    }
 
-    public Collection<Course> getCoursesTaken() {
-        return coursesTaken;
+    public void setCourseRecords(Collection<CourseRecord> courseRecords) {
+            this.courseRecords = courseRecords;
     }
     
-    public void setCoursesTaken(Collection<Course> selected) {
-        if (selected == null) {
-            this.coursesTaken = null;
-        } else {
-            this.coursesTaken = selected;            
-        }
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -140,6 +150,6 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", role=" + role + ", coursesTaught=" + coursesTaught + ", coursesTaken=" + coursesTaken + '}';
+        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", courseRecords=" + courseRecords + '}';
     }
 }

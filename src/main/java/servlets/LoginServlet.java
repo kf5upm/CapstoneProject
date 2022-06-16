@@ -20,14 +20,12 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logger.debug("Get received");
         processLogin(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logger.debug("Post received");
         processLogin(request, response);
     }
 
@@ -42,10 +40,8 @@ public class LoginServlet extends HttpServlet {
             User user = new UserDao().find(userId);
             
             if (user == null) {
-                logger.debug("Unknown user.");
                 errorMessage = "Unknown user or bad password.";
             } else {
-                logger.debug("User found.");
                 session.setAttribute("user", user);
 
                 String viewsPath = "/views/" + user.getRole().getTitle().toLowerCase() + "/";

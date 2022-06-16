@@ -84,7 +84,7 @@
                     <label for="offerings" class="control-label">Offered Courses</label>
                     <select name="offerings" id="offerings" multiple>
                         <c:forEach items="${offered}" var="offering">
-                            <option value="${offering.getId()}"  <c:if test="${fn:contains(selected.getCoursesTaken(), offering)}">SELECTED</c:if>>
+                            <option value="${offering.getId()}"  <c:if test="${fn:contains(selected.getCourseRecords(), offering)}">SELECTED</c:if>>
                                 ${offering.getName()}
                             </option>
                         </c:forEach>
@@ -120,8 +120,8 @@
                               <td>${student.getGender()}</td>
                               <td>${student.getGpa()}</td>
                               <td>
-                                <c:forEach items="${student.getCoursesTaken()}" var="course" varStatus="loop">
-                                    ${course.getName()}<c:if test="${!loop.last}">,</c:if>
+                                <c:forEach items="${student.getCourseRecords()}" var="courseRecord" varStatus="loop">
+                                    ${courseRecord.getCourse().getName()}<c:if test="${!loop.last}">,</c:if>
                                 </c:forEach>
                               </td>
                               <td class="action text-center"><a href="<c:url value="/Manage/Students/Edit/${student.getId()}"/>">Edit</a> | <a class="confirmation" href="<c:url value="/Manage/Students/Delete/${student.getId()}"/>">Delete</a></td>

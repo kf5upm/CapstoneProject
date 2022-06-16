@@ -2,7 +2,6 @@ package entities;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -37,9 +36,12 @@ public class Course implements Serializable {
     //@ManyToMany
     //@JoinTable(name = "course_records", joinColumns = @JoinColumn(name = "CourseId"), inverseJoinColumns = @JoinColumn(name = "StudentId"))
     //private List<User> students;
-
-    @ManyToMany(mappedBy = "coursesTaken")
-    private Collection<User> students;
+    //@ManyToMany(mappedBy = "coursesTaken")
+    //private Collection<User> students;
+    
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
+    private Collection<CourseRecord> courseRecords;
+    
     
     public Long getId() {
         return id;
@@ -73,10 +75,14 @@ public class Course implements Serializable {
         this.teacher = teacher;
     }
 
-    public Collection<User> getStudents() {
-        return students;
+    public Collection<CourseRecord> getCourseRecords() {
+        return courseRecords;
     }
 
+    public void setCourseRecords(Collection<CourseRecord> courseRecords) {
+        this.courseRecords = courseRecords;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -99,6 +105,6 @@ public class Course implements Serializable {
 
     @Override
     public String toString() {
-        return "Course{" + "id=" + id + ", name=" + name + ", credits=" + credits + ", teacher=" + teacher + ", students=" + students + '}';
+        return "Course{" + "id=" + id + ", name=" + name + ", credits=" + credits + ", teacher=" + teacher + '}';
     }
 }

@@ -1,17 +1,17 @@
 package servlets;
 
-import dao.CourseDao;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import dao.CourseDao;
 import dao.RoleDao;
 import dao.StudentDao;
 import dao.UserDao;
 import entities.Course;
+import entities.CourseRecord;
 import entities.User;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +40,7 @@ public class StudentAdminServlet extends AbstractAdminServlet<User> {
             throws ServletException, IOException {
         
         User student = new User();
+        
         student.setId(Long.parseLong(request.getParameter("id")));
         student.setFirstName(request.getParameter("firstname"));
         student.setLastName(request.getParameter("lastname"));
@@ -47,20 +48,23 @@ public class StudentAdminServlet extends AbstractAdminServlet<User> {
         student.setGpa(Float.parseFloat(request.getParameter("gpa")));
         student.setRole(new RoleDao().findByTitle("Student"));
         
-        String[] courses = request.getParameterValues("courses");
-        Collection<Course> coursesSelected = new ArrayList<>();
+        String[] courses = request.getParameterValues("offerings");
+        Collection<CourseRecord> coursesSelected = new ArrayList<>();
         
         CourseDao courseDao = new CourseDao();
         
         if (courses != null) {
             for(String courseId : courses) {
-                Course tmp = courseDao.find(Long.parseLong(courseId));
-                coursesSelected.add(tmp);
+                Course courseSelected = courseDao.find(Long.parseLong(courseId));
+                CourseRecord courseRecord = new CourseRecord();
+                
+                courseRecord.setStudent(student);
+                courseRecord.setCourse(courseSelected);
+                coursesSelected.add(courseRecord);
             }
         }
         
-        student.setCoursesTaken(coursesSelected);
-        
+        student.setCourseRecords(coursesSelected);
         new UserDao().save(student);
     }
     
@@ -70,7 +74,6 @@ public class StudentAdminServlet extends AbstractAdminServlet<User> {
 
         Long studentId = Long.parseLong(request.getParameter("id"));
 
-        StudentDao sdao = new StudentDao();
         User student = sdao.find(studentId);
 
         student.setFirstName(request.getParameter("firstname"));
@@ -78,19 +81,23 @@ public class StudentAdminServlet extends AbstractAdminServlet<User> {
         student.setGender(request.getParameter("gender"));
         student.setGpa(Float.parseFloat(request.getParameter("gpa")));
         
-        String[] courses = request.getParameterValues("courses");
-        Collection<Course> coursesSelected = new ArrayList<>();
+        String[] courses = request.getParameterValues("offerings");
+        Collection<CourseRecord> coursesSelected = new ArrayList<>();
         
         CourseDao courseDao = new CourseDao();
         
         if (courses != null) {
             for(String courseId : courses) {
-                Course tmp = courseDao.find(Long.parseLong(courseId));
-                coursesSelected.add(tmp);
+                Course courseSelected = courseDao.find(Long.parseLong(courseId));
+                CourseRecord courseRecord = new CourseRecord();
+                
+                courseRecord.setStudent(student);
+                courseRecord.setCourse(courseSelected);
+                coursesSelected.add(courseRecord);
             }
         }
         
-        student.setCoursesTaken(coursesSelected);
+        student.setCourseRecords(coursesSelected);
         sdao.update(student);
     }
 }

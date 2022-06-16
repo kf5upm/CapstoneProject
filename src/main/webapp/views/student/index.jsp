@@ -31,12 +31,56 @@
             </div>
         </nav>
         <p class="text-right small mr-2">View version 0.02</p>
-        <div class="container col-12 text-center">
-            <br/><br/><br/>
-            <h1>Welcome ${user.getFirstName()} ${user.getLastName()}</h1>
-            <img src="images/home-logo.png"/>
+        <div class="container col-12">
+            <div class="row">
+                <div class="col-2">
+                    <table class="table ">
+                        <caption><h5>Student Information</h5></caption>
+                        <tr>
+                            <th class="text-right">First Name:</th>
+                            <td>${user.getFirstName()}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">Last Name:</th>
+                            <td>${user.getLastName()}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">Gender:</th>
+                            <td>${user.getGender()}</td>
+                        </tr>
+                        <tr>
+                            <th class="text-right">GPA:</th>
+                            <td>${user.getGpa()}</td>
+                        </tr>
+                        </th>
+                    </table>
+                </div>
+            
+                <div class="col-10">
+                    <table class="table">
+                      <caption><h5>Course List</h5></caption>
+                      <thead class="thead-light">
+                          <tr>
+                              <th>Course Name</th>
+                              <th>Instructor</th>
+                              <th>Credits Possbile</th>
+                              <th>Credits Earned</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        <c:forEach items="${user.getCourseRecords()}" var="courseRecord">
+                            <tr>
+                                <td>${courseRecord.getCourse().getName()}</td>
+                                <td>${courseRecord.getCourse().getTeacher().getFirstName()} ${courseRecord.getCourse().getTeacher().getLastName()}</td>
+                                <td>${courseRecord.getCourse().getCredits()}</td>
+                                <td>${courseRecord.getCredits()}</td>
+                            </tr>
+                        </c:forEach>
+                      </tbody>
+                  </table>
+                </div>
+            </div>
         </div>
-        
         
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
