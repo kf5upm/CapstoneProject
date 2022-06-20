@@ -31,10 +31,55 @@
             </div>
         </nav>
         <p class="text-right small mr-2">View version 0.02</p>
-        <div class="container col-12 text-center">
-            <br/><br/><br/>
-            <h1>Welcome ${user.getFirstName()} ${user.getLastName()}</h1>
-            <img src="images/home-logo.png"/>
+        <div class="container col-12">
+
+
+            <div class="row">
+                <div class="col-2">
+                    <table class="table ">
+                        <caption><h5>My Courses</h5></caption>
+                        
+                        
+                        <c:forEach items="${user.getCoursesTaught()}" var="course">
+                            <tr>
+                                <td>${course.getName()}</td>
+                            </tr>
+                        </c:forEach>
+
+                    </table>
+                </div>
+            
+                <div class="col-10">
+                    <table class="table">
+                      <caption><h5>Roster</h5></caption>
+                      <thead class="thead-light">
+                          <tr>
+                              <th>First Name</th>
+                              <th>Last Name</th>
+                              <th>Gender</th>
+                              <th>Credits Earned</th>
+                              <th class="text-right">Actions</th>
+                          </tr>
+                      </thead>
+                    <tbody>
+                    </tbody>
+                  </table>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
         
         

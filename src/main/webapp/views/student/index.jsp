@@ -52,7 +52,6 @@
                             <th class="text-right">GPA:</th>
                             <td>${user.getGpa()}</td>
                         </tr>
-                        </th>
                     </table>
                 </div>
             
@@ -63,7 +62,7 @@
                           <tr>
                               <th>Course Name</th>
                               <th>Instructor</th>
-                              <th>Credits Possbile</th>
+                              <th>Credits Possible</th>
                               <th>Credits Earned</th>
                           </tr>
                       </thead>
