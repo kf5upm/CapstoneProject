@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.learning</groupId>
-    <artifactId>McDowell_Capstone</artifactId>
+    <artifactId>Java_Capstone</artifactId>
     <version>0.1</version>
     <packaging>war</packaging>
 
-    <name>McDowell_Capstone</name>
+    <name>Java_Capstone</name>
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
@@ -33,32 +33,32 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.core</artifactId>
-            <version>2.7.9</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.asm</artifactId>
-            <version>9.1.0</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.antlr</artifactId>
-            <version>2.7.9</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa</artifactId>
-            <version>2.7.9</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.jpql</artifactId>
-            <version>2.7.9</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.moxy</artifactId>
-            <version>2.7.9</version>
+            <version>2.7.7</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
@@ -68,7 +68,7 @@
         <dependency>
             <groupId>org.eclipse.persistence</groupId>
             <artifactId>org.eclipse.persistence.jpa.modelgen.processor</artifactId>
-            <version>2.7.9</version>
+            <version>2.7.7</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -101,7 +101,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.3</version>
+                <version>3.4.0</version>
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
@@ -133,5 +133,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
